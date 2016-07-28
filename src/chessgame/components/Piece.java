@@ -1,6 +1,7 @@
 package chessgame.components;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -12,6 +13,7 @@ import java.util.Set;
 public abstract class Piece implements Serializable {
   private static final long serialVersionUID = -7701612189619741089L;
   private Position position;
+  private final int value;
   // "white" or "black"
   private PieceColor color;
   transient protected Board board;
@@ -32,18 +34,29 @@ public abstract class Piece implements Serializable {
    * @param board
    *          Board object where the match is being played
    */
+  public Piece(int row, int col, PieceColor color, Board board, int value) {
+    this(new Position(row, col), color, board, value);
+  }
+  
   public Piece(int row, int col, PieceColor color, Board board) {
-    position = new Position(row, col);
-    this.color = color;
-    this.board = board;
+    this(row, col, color, board, 0);
+  }
+  
+  public Piece(Position pos, PieceColor color, Board board) {
+    this(pos, color, board, 0);
   }
 
-  public Piece(Position pos, PieceColor color, Board board) {
+  public Piece(Position pos, PieceColor color, Board board, int value) {
     position = pos;
     this.color = color;
     this.board = board;
+    this.value = value;
   }
-
+  
+  public int getValue() {
+    return value;
+  }
+  
   /**
    * Getter of the row.
    * 
@@ -72,6 +85,14 @@ public abstract class Piece implements Serializable {
 
   public void setPosition(Position pos, boolean realMove) {
     setPosition(pos);
+  }
+  
+  public Set<Movement> toMovementSet(Set<Position> possibleMoves) {
+    Set<Movement> moves = new HashSet<>();
+    for (Position pos : possibleMoves) {
+      moves.add(new Movement(this.position, pos));
+    }
+    return moves;
   }
 
   /**

@@ -16,4 +16,8 @@ public enum PieceColor {
   public String getColorName() {
     return colorName;
   }
+  
+  public PieceColor oppositeColor() {
+    return (this == PieceColor.WHITE) ? PieceColor.BLACK : PieceColor.WHITE;
+  }
 }

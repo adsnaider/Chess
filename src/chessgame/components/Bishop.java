@@ -8,11 +8,11 @@ public class Bishop extends Piece {
   public static final String NAME = "Bishop";
 
   public Bishop(int row, int col, PieceColor color, Board board) {
-    super(row, col, color, board);
+    super(row, col, color, board, 3);
   }
 
   public Bishop(Position pos, PieceColor color, Board board) {
-    super(pos, color, board);
+    super(pos, color, board, 3);
   }
 
   @Override

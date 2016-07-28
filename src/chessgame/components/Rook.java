@@ -9,11 +9,11 @@ public class Rook extends Piece {
   public boolean moved = false;
 
   public Rook(int row, int col, PieceColor color, Board board) {
-    super(row, col, color, board);
+    super(row, col, color, board, 5);
   }
 
   public Rook(Position pos, PieceColor color, Board board) {
-    super(pos, color, board);
+    super(pos, color, board, 5);
   }
 
   public boolean hasMoved() {

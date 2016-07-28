@@ -16,6 +16,7 @@ public class Board {
   private King blackKing;
   private Map<Position, Piece> squares;
   private Movement lastMove;
+  private Map<Position, Piece> lastSquares;
 
   public Board() {
     squares = new HashMap<Position, Piece>();
@@ -53,7 +54,7 @@ public class Board {
    * 
    * @param piece
    *          The piece you want to add to the board.
-   * @return Returns true if the piece was succesfully inserted. Returns false
+   * @return Returns true if the piece was successfully inserted. Returns false
    *         otherwise.
    */
   public boolean setPiece(Piece piece) {
@@ -171,6 +172,7 @@ public class Board {
    *         false.
    */
   public boolean movePiece(Movement move, boolean checkKing) {
+    lastSquares = new HashMap<Position, Piece>(squares);
     Piece piece = getPiece(move.initialPos);
     if (piece != null && piece.isPossibleMove(move.finalPos, checkKing)) {
       killElPassantPawn(move);
@@ -181,7 +183,15 @@ public class Board {
     }
     return false;
   }
-
+  
+  public boolean revertMove() {
+    if (lastSquares != null) {
+      squares = new HashMap<Position, Piece>(lastSquares);
+      return true;
+    }
+    return false;
+  }
+  
   /**
    * Last move in the board
    * 
@@ -218,6 +228,16 @@ public class Board {
         }
       }
     }
+  }
+  
+  public int getScore(PieceColor color) {
+    int total = 0;
+    for (Piece piece : squares.values()) {
+      if (piece != null && piece.getColor() == color) {
+        total += piece.getValue();
+      }
+    }
+    return total;
   }
 
   /**

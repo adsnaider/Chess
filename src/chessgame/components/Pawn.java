@@ -8,11 +8,11 @@ public class Pawn extends Piece {
   public static final String NAME = "Pawn";
 
   public Pawn(int row, int col, PieceColor color, Board board) {
-    super(row, col, color, board);
+    super(row, col, color, board, 1);
   }
 
   public Pawn(Position pos, PieceColor color, Board board) {
-    super(pos, color, board);
+    super(pos, color, board, 1);
   }
 
   @Override

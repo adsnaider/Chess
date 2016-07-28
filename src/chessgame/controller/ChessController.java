@@ -54,7 +54,11 @@ public class ChessController {
     view.update(model.getSquares());
     view.repaint();
     Movement move = model.setData(pos);
-    if (move != null) {
+    makeMove(move);
+ }
+  
+  public void makeMove(Movement move) {
+     if (move != null) {
       Action action = model.makeMove(move);
       processAction(action);
       view.update(model.getSquares());
@@ -65,6 +69,7 @@ public class ChessController {
         view.showWinner(PieceColor.WHITE);
       }
     }
+    
   }
 
   public int getTime() {

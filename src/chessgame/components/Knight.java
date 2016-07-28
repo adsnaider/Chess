@@ -8,11 +8,11 @@ public class Knight extends Piece {
   public static final String NAME = "Knight";
 
   public Knight(int row, int col, PieceColor color, Board board) {
-    super(row, col, color, board);
+    super(row, col, color, board, 3);
   }
 
   public Knight(Position pos, PieceColor color, Board board) {
-    super(pos, color, board);
+    super(pos, color, board, 3);
   }
 
   @Override
